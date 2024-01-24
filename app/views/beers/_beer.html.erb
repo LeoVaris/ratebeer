@@ -14,4 +14,12 @@
     <%= beer.brewery.name %>
   </p>
 
+  <p>
+  <% if beer.ratings.empty? %>
+    beer has not yet been rated!
+  <% else %>
+    Beer has <%= pluralize(beer.ratings.size, 'rating') %> with an average of <%= (beer.average_rating).to_f %>
+  <% end %>
+  </p>
+
 </div>

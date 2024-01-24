@@ -13,6 +13,8 @@ class BeersController < ApplicationController
   # GET /beers/new
   def new
     @beer = Beer.new
+    @breweries = Brewery.all
+    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter", "Lowalcohol"]
   end
 
   # GET /beers/1/edit
@@ -23,14 +25,8 @@ class BeersController < ApplicationController
   def create
     @beer = Beer.new(beer_params)
 
-    respond_to do |format|
-      if @beer.save
-        format.html { redirect_to beer_url(@beer), notice: "Beer was successfully created." }
-        format.json { render :show, status: :created, location: @beer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @beer.errors, status: :unprocessable_entity }
-      end
+    if @beer.save
+      redirect_to beers_path
     end
   end
 
@@ -61,7 +57,7 @@ class BeersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_beer
       @beer = Beer.find(params[:id])
-      @brewery = Brewery.find(beer.brewery_id)
+      @brewery = Brewery.find(@beer.brewery_id)
     end
 
     # Only allow a list of trusted parameters through.
