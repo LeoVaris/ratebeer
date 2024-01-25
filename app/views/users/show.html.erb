@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<div>
+  <p>
+    <strong>Username:</strong>
+
+    <%= @user.username %>
+  </p>
+
+</div>
+
+<p>
+  <% if @user and not @user.ratings.empty? %>
+    User has made <%= pluralize(@user.ratings.size, 'rating') %> with an average of <%= @user.average_rating.to_f %>
+  <% end %>
+</p>
+
+<strong>ratings</strong>
+
+<% @user.ratings.each do |r| %>
+    <p>
+      <%= r.beer.name %> <%= r.score %> <%= link_to 'Delete', rating_path(r), data: { "turbo-method": :delete } %>
+    </p>
+  <% end %>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <%= link_to "Back to users", users_path %>
+
+  <%= button_to "Destroy this user", @user, method: :delete %>
+</div>
