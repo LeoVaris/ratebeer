@@ -17,15 +17,37 @@
 
 <strong>ratings</strong>
 
-<% @user.ratings.each do |r| %>
-    <p>
-      <%= r.beer.name %> <%= r.score %> <%= link_to 'Delete', rating_path(r), data: { "turbo-method": :delete } %>
-    </p>
+<ul>
+  <% @user.ratings.each do |rating| %>
+    <li><%= "#{rating.to_s}" %>
+      <% if @user == current_user %>
+        <%= link_to "Delete", rating, data: {turbo_method: :delete} %>
+      <% end %>
+    </li>
   <% end %>
+</ul>
+
+<h3>
+  Beer clubs:
+</h3>
 
 <div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <% @beer_clubs.each do |club| %>
+    <p>
+      <%= link_to club.name, beer_club_path(club) %>
+    </p>
+  <% end %>
+</div>
+
+<div>
+  <% if @user == current_user %>
+    <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <% end %>
+  
   <%= link_to "Back to users", users_path %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+  <% if @user == current_user %>
+    <%= button_to "Destroy this user", @user, method: :delete %>
+  <% end %>
+  
 </div>
