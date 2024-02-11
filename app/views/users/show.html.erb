@@ -15,6 +15,18 @@
   <% end %>
 </p>
 
+<p>
+  <% if @user and @user.favorite_style %>
+    Favorite style: <strong><%= @user.favorite_style %></strong>
+  <% end %>
+</p>
+
+<p>
+  <% if @user and @user.favorite_brewery %>
+    Favorite brewery: <strong><%= @user.favorite_brewery %></strong>
+  <% end %>
+</p>
+
 <strong>ratings</strong>
 
 <ul>
