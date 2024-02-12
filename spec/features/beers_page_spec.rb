@@ -4,12 +4,14 @@ describe "Beers page" do
   it "should not have any before been created" do
     visit beers_path
     expect(page).not_to have_content 'Style'
-
   end
 
   describe "when at least one brewery exists" do
     before :each do
+      FactoryBot.create :user
       FactoryBot.create(:brewery, name: "Koff", year: 1896)
+
+      sign_in(username: "Pekka", password: "Foobar1")
 
       visit new_beer_path
     end
