@@ -7,9 +7,9 @@
 name: "Ruby on Rails CI"
 on:
   push:
-    branches: [ "main" ] # Jos repositoriosi päähaara ei ole main, muuta nämä
+    branches: [ "master" ] # Jos repositoriosi päähaara ei ole main, muuta nämä
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 jobs:
   test:
     runs-on: ubuntu-22.04
